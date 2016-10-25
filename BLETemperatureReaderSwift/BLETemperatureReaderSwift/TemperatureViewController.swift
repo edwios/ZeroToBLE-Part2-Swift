@@ -49,7 +49,7 @@ class TemperatureViewController: UIViewController, CBCentralManagerDelegate, CBP
     // This could be simplified to "SensorTag" and check if it's a substring.
     // (Probably a good idea to do that if you're using a different model of
     // the SensorTag, or if you don't know what model it is...)
-    let sensorTagName = "CC2650 SensorTag"
+    let sensorTagName = "uilla"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -442,7 +442,7 @@ class TemperatureViewController: UIViewController, CBCentralManagerDelegate, CBP
             for service in services {
                 print("Discovered service \(service)")
                 // If we found either the temperature or the humidity service, discover the characteristics for those services.
-                if (service.UUID == CBUUID(string: Device.TemperatureServiceUUID)) ||
+                if (service.UUID == CBUUID(string: Device.SensorServiceUUID)) ||
                     (service.UUID == CBUUID(string: Device.HumidityServiceUUID)) {
                     peripheral.discoverCharacteristics(nil, forService: service)
                 }
@@ -472,14 +472,14 @@ class TemperatureViewController: UIViewController, CBCentralManagerDelegate, CBP
 
             for characteristic in characteristics {
                 // Temperature Data Characteristic
-                if characteristic.UUID == CBUUID(string: Device.TemperatureDataUUID) {
+                if characteristic.UUID == CBUUID(string: Device.SensorCharUUID) {
                     // Enable the IR Temperature Sensor notifications
                     temperatureCharacteristic = characteristic
                     sensorTag?.setNotifyValue(true, forCharacteristic: characteristic)
                 }
                 
                 // Temperature Configuration Characteristic
-                if characteristic.UUID == CBUUID(string: Device.TemperatureConfig) {
+                if characteristic.UUID == CBUUID(string: Device.SesnorNtfnUUID) {
                     // Enable IR Temperature Sensor
                     sensorTag?.writeValue(enableBytes, forCharacteristic: characteristic, type: .WithResponse)
                 }
@@ -518,7 +518,7 @@ class TemperatureViewController: UIViewController, CBCentralManagerDelegate, CBP
         
         // extract the data from the characteristic's value property and display the value based on the characteristic type
         if let dataBytes = characteristic.value {
-            if characteristic.UUID == CBUUID(string: Device.TemperatureDataUUID) {
+            if characteristic.UUID == CBUUID(string: Device.SensorCharUUID) {
                 displayTemperature(dataBytes)
             } else if characteristic.UUID == CBUUID(string: Device.HumidityDataUUID) {
                 displayHumidity(dataBytes)
