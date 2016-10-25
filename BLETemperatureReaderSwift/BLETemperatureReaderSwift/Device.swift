@@ -31,8 +31,11 @@ struct Device {
     static let SensorTagAdvertisingUUID = "AA10"
     
     static let TemperatureServiceUUID = "F000AA00-0451-4000-B000-000000000000"
+    static let SensorServiceUUID = "5CB6AAEB-A9CF-4876-BE2C-79BB00000000"
     static let TemperatureDataUUID = "F000AA01-0451-4000-B000-000000000000"
+    static let SesnorCharUUID = "5CB6181a-A9CF-4876-BE2C-79BB00000000"
     static let TemperatureConfig = "F000AA02-0451-4000-B000-000000000000"
+    static let SesnorNtfnUUID = "5CB62a76-A9CF-4876-BE2C-79BB00000000"
 
     static let HumidityServiceUUID = "F000AA20-0451-4000-B000-000000000000"
     static let HumidityDataUUID = "F000AA21-0451-4000-B000-000000000000"
